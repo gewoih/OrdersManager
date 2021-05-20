@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{15FBFD4B-FBDD-4DC6-9DFA-6AF3EF10E1DE}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="XTrade.OrdersManager.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\RequestGenerator\RequestsGenerator.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="XTrade_OrdersManager">
+        <MSBuild Projects="XTrade.OrdersManager.dproj"/>
+    </Target>
+    <Target Name="XTrade_OrdersManager:Clean">
+        <MSBuild Projects="XTrade.OrdersManager.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="XTrade_OrdersManager:Make">
+        <MSBuild Projects="XTrade.OrdersManager.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="RequestsGenerator">
+        <MSBuild Projects="..\RequestGenerator\RequestsGenerator.dproj"/>
+    </Target>
+    <Target Name="RequestsGenerator:Clean">
+        <MSBuild Projects="..\RequestGenerator\RequestsGenerator.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="RequestsGenerator:Make">
+        <MSBuild Projects="..\RequestGenerator\RequestsGenerator.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="XTrade_OrdersManager;RequestsGenerator"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="XTrade_OrdersManager:Clean;RequestsGenerator:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="XTrade_OrdersManager:Make;RequestsGenerator:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
