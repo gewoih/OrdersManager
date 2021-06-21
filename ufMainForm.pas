@@ -156,12 +156,15 @@ type
     tOrderRec = record
     	mid:			integer;
     	pid:			integer;
-        number: 		integer;
-        item:   		AnsiString;
-        price:      	double;
-        quantity:   	integer;
-        sum:     		double;
-        contract_id:	integer;
+		number: 		integer;
+		item_name:     	AnsiString;
+		price_in:      	double;
+		price:			double;
+		quantity:   	integer;
+		sum_in:     	double;
+		sum:			double;
+		margin:			double;
+		contract_id:	integer;
         contract_name:  AnsiString;
         stock:          integer;
     end;
@@ -188,8 +191,8 @@ type
     tFields = (f_pid, f_order_number, f_order_sum, f_name, f_date, f_number,
     		   f_email, f_comment, f_status, f_manager, f_version,
                f_warehouse, f_payment_method, f_delivery_method,
-               f_discount, f_delivery_date, f_delivery_address,
-               f_manager_comment);
+			   f_discount, f_delivery_date, f_delivery_address,
+			   f_manager_comment, f_order_sum_in);
 
     tDataRec = array[tfields] of Variant;
 
@@ -225,8 +228,6 @@ begin
 end;
 
 procedure TForm1.FillUpData(K: integer; R, R1: OleVariant);
-var
-    summ:	integer;
 begin
 	Data[K, f_order_number] := K + 1;
     Data[K, f_pid] := AsInt(R, 'pid');
@@ -239,12 +240,14 @@ begin
     Data[K, f_manager] := AsStr(R, '8');
     Data[K, f_version] := AsStr(R, '0');
 
-    Data[K, f_order_sum] := 0;
-    while not R1.EOF do
-    begin
-        Data[K, f_order_sum] := Data[K, f_order_sum] + AsExt(R1, 'summ');
-        R1.MoveNext;
-    end;
+	Data[K, f_order_sum] := 0;
+	Data[K, f_order_sum_in] := 0;
+	while not R1.EOF do
+	begin
+		Data[K, f_order_sum] := Data[K, f_order_sum] + AsExt(R1, 'summ');
+		Data[K, f_order_sum_in] := Data[K, f_order_sum_in] + AsExt(R1, 'summ_in');
+		R1.MoveNext;
+	end;
 
     Data[K, f_warehouse] := AsStr(R, '14');
     Data[K, f_payment_method] := AsStr(R, '15');
@@ -346,7 +349,7 @@ begin
 
         else if (status = '') and (manager <> '') then
         begin
-            if MainTree.Text[Node, 6] = manager then
+			if MainTree.Text[Node, 7] = manager then
             	MainTree.IsVisible[Node] := true
             else
             	MainTree.IsVisible[Node] := false;
@@ -354,7 +357,7 @@ begin
 
         else if (status <> '') and (manager = '') then
         begin
-        	if MainTree.Text[Node, 7] = status then
+			if MainTree.Text[Node, 8] = status then
             	MainTree.IsVisible[Node] := true
             else
             	MainTree.IsVisible[Node] := false;
@@ -362,7 +365,7 @@ begin
 
         else if (status <> '') and (manager <> '') then
     	begin
-            if (MainTree.Text[Node, 6] = manager) and (MainTree.Text[Node, 7] = status) then
+			if (MainTree.Text[Node, 7] = manager) and (MainTree.Text[Node, 8] = status) then
             	MainTree.IsVisible[Node] := true
             else
             	MainTree.IsVisible[Node] := false;
@@ -481,13 +484,16 @@ begin
         begin
             SetLength(orders, K + 1);
 
-            orders[K].mid := AsInt(R, '11');
-            orders[K].pid := AsInt(R, 'pid');
-            orders[K].number := K + 1;
-        	orders[K].item := AsStr(R, 'item');
-        	orders[K].price := AsExt(R, '13');
-        	orders[K].quantity := AsInt(R, '12');
-        	orders[K].sum := orders[K].price * orders[K].quantity;
+			orders[K].mid := AsInt(R, 'item_id');
+			orders[K].pid := AsInt(R, 'pid');
+			orders[K].number := K + 1;
+			orders[K].item_name := AsStr(R, 'item_name');
+			orders[K].price_in := AsExt(R, 'price_in');
+			orders[K].price := AsExt(R, 'price');
+			orders[K].quantity := AsInt(R, 'quantity');
+			orders[K].sum_in := AsExt(R, 'summ_in');
+			orders[K].sum := AsExt(R, 'summ');
+			orders[K].margin := AsExt(R, 'margin');
             orders[K].contract_id := AsInt(R, 'contract_id');
             orders[K].contract_name := AsStr(R, 'contract_name');
             orders[K].stock := AsInt(R, 'stock');
@@ -616,12 +622,15 @@ begin
 	case Column of
     0: CellText := orders[Node.RowIndex].number.ToString;
     1: CellText := orders[Node.RowIndex].mid.ToString;
-    2: CellText := orders[Node.RowIndex].item;
-    3: CellText := FormatFloat('#,##0.00', orders[Node.RowIndex].price);
-    4: CellText := orders[Node.RowIndex].quantity.ToString;
-    5: CellText := FormatFloat('#,##0.00', orders[Node.RowIndex].sum);
-    6: CellText := orders[Node.RowIndex].contract_name;
-    7: CellText := orders[Node.RowIndex].stock.ToString;
+    2: CellText := orders[Node.RowIndex].item_name;
+	3: CellText := FormatFloat('#,##0.00', orders[Node.RowIndex].price);
+	4: CellText := FormatFloat('#,##0.00', orders[Node.RowIndex].price_in);
+	5: CellText := orders[Node.RowIndex].quantity.ToString;
+	6: CellText := FormatFloat('#,##0.00', orders[Node.RowIndex].sum);
+	7: CellText := FormatFloat('#,##0.00', orders[Node.RowIndex].sum_in);
+	8: CellText := FormatFloat('#,##0.00', orders[Node.RowIndex].sum - orders[Node.RowIndex].sum_in);
+	9: CellText := orders[Node.RowIndex].contract_name;
+	10: CellText := orders[Node.RowIndex].stock.ToString;
   end;
 end;
 
@@ -702,7 +711,8 @@ begin
     8: CellText := Data[Node.RowIndex, f_manager];
     7: CellText := Data[Node.RowIndex, f_status];
     6: CellText := Data[Node.RowIndex, f_comment];
-    9: CellText := FormatFloat('#,##0.00', Data[Node.RowIndex, f_order_sum]);
+	9: CellText := FormatFloat('#,##0.00', Data[Node.RowIndex, f_order_sum]);
+	10: CellText := FormatFloat('#,##0.00', Data[Node.RowIndex, f_order_sum] - Data[Node.RowIndex, f_order_sum_in]);
   end;
 end;
 {$ENDREGION}
@@ -822,7 +832,7 @@ function AssembleMessage: AnsiString;
 begin
 	for var i := Low(Orders) to High(Orders) do
     begin
-        Result := Result + Orders[i].item + #$D#$A;
+        Result := Result + Orders[i].item_name + #$D#$A;
     end;
 end;
 
@@ -867,18 +877,29 @@ begin
 end;
 
 procedure TForm1.FormCreate(Sender: TObject);
+var
+	UserId:	integer;
 begin
-    ShowPanel(0, fParams.AsStr['user']);
-    ShowPanel(1, fParams.AsInt['userid'].ToString);
-    ShowPanel(2, '—борка: ' + fIniFile.Values['data']);
+	ShowPanel(0, fParams.AsStr['user']);
+	ShowPanel(1, fParams.AsInt['userid'].ToString);
+	ShowPanel(2, '—борка: ' + fIniFile.Values['data']);
 
 	fSect := TCriticalSection.Create;
 
-    fThread := txSyncThread.Create(True);
-  	fThread.FreeOnTerminate := True;
-  	fThread.SyncProc := SyncProc;
-  	fThread.Start;
+	fThread := txSyncThread.Create(True);
+	fThread.FreeOnTerminate := True;
+	fThread.SyncProc := SyncProc;
+	fThread.Start;
 
+	UserId := fParams.AsInt['userid'];
+	if UserId = 75615 then
+	begin
+		MainTree.Header.Columns[3].Options := MainTree.Header.Columns[3].Options - [coVisible];
+		OrdersTree.Header.Columns[4].Options := OrdersTree.Header.Columns[4].Options - [coVisible];
+		OrdersTree.Header.Columns[7].Options := OrdersTree.Header.Columns[7].Options - [coVisible];
+		OrdersTree.Header.Columns[8].Options := OrdersTree.Header.Columns[8].Options - [coVisible];
+	end;
+	
 	ConnectSQL(fcon);
     LoadOrders;
     fSkipChar := false;
@@ -904,9 +925,9 @@ begin
     	fSkipChar := False
     else
     begin
-    	if (Key<#32) and (Key<>#8) then Exit;
-    	if (Key=#32) and (Filter='') then Exit;
-    	case Key of
+		if (Key < #32) and (Key <> #8) then Exit;
+		if (Key = #32) and (Filter = '') then Exit;
+		case Key of
       		#8: Filter := LeftStr(Filter, Length(Filter) - 1);
     	else
       		Filter := Filter + Key;

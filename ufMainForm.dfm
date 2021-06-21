@@ -80,12 +80,12 @@ object Form1: TForm1
       Colors.SelectionRectangleBorderColor = 15385233
       Colors.SelectionTextColor = clBlack
       Colors.TreeLineColor = 9471874
-      Colors.UnfocusedColor = 9695420
+      Colors.UnfocusedColor = 9687928
       Colors.UnfocusedSelectionColor = 15385233
       Colors.UnfocusedSelectionBorderColor = 15385233
-      Colors.HeaderColor = 9695420
+      Colors.HeaderColor = 9687928
       DefaultNodeHeight = 25
-      Header.AutoSizeIndex = 8
+      Header.AutoSizeIndex = 9
       Header.DefaultHeight = 25
       Header.Font.Charset = DEFAULT_CHARSET
       Header.Font.Color = clWindowText
@@ -131,6 +131,7 @@ object Form1: TForm1
         end
         item
           Alignment = taRightJustify
+          CaptionAlignment = taCenter
           Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coUseCaptionAlignment, coEditable]
           Position = 2
           Tag = 9
@@ -140,9 +141,20 @@ object Form1: TForm1
           WideText = #1057#1091#1084#1084#1072' '#1079#1072#1082#1072#1079#1072
         end
         item
+          Alignment = taRightJustify
           CaptionAlignment = taCenter
           Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coUseCaptionAlignment, coEditable]
           Position = 3
+          Tag = 10
+          Width = 80
+          Aggregate = False
+          FilterMode = 0
+          WideText = #1052#1072#1088#1078#1072
+        end
+        item
+          CaptionAlignment = taCenter
+          Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coUseCaptionAlignment, coEditable]
+          Position = 4
           Spacing = 4
           Tag = 2
           Width = 200
@@ -153,7 +165,7 @@ object Form1: TForm1
         item
           CaptionAlignment = taCenter
           Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coUseCaptionAlignment, coEditable]
-          Position = 4
+          Position = 5
           Tag = 4
           Width = 150
           Aggregate = False
@@ -163,7 +175,7 @@ object Form1: TForm1
         item
           CaptionAlignment = taCenter
           Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coUseCaptionAlignment, coEditable]
-          Position = 5
+          Position = 6
           Tag = 5
           Width = 200
           Aggregate = False
@@ -173,7 +185,7 @@ object Form1: TForm1
         item
           CaptionAlignment = taCenter
           Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coUseCaptionAlignment, coEditable]
-          Position = 6
+          Position = 7
           Tag = 8
           Width = 160
           Aggregate = False
@@ -183,9 +195,9 @@ object Form1: TForm1
         item
           CaptionAlignment = taCenter
           Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coUseCaptionAlignment, coEditable]
-          Position = 7
+          Position = 8
           Tag = 7
-          Width = 220
+          Width = 150
           Aggregate = False
           FilterMode = 0
           WideText = #1057#1090#1072#1090#1091#1089
@@ -193,9 +205,9 @@ object Form1: TForm1
         item
           CaptionAlignment = taCenter
           Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coUseCaptionAlignment, coEditable]
-          Position = 8
+          Position = 9
           Tag = 6
-          Width = 20
+          Width = 10
           Aggregate = False
           FilterMode = 0
           WideText = #1055#1088#1080#1084#1077#1095#1072#1085#1080#1077
@@ -595,10 +607,10 @@ object Form1: TForm1
         Colors.SelectionRectangleBorderColor = 15385233
         Colors.SelectionTextColor = clBlack
         Colors.TreeLineColor = 9471874
-        Colors.UnfocusedColor = 9695224
+        Colors.UnfocusedColor = 9687732
         Colors.UnfocusedSelectionColor = 15385233
         Colors.UnfocusedSelectionBorderColor = 15385233
-        Colors.HeaderColor = 9695224
+        Colors.HeaderColor = 9687732
         DefaultNodeHeight = 25
         Header.AutoSizeIndex = 7
         Header.DefaultHeight = 25
@@ -806,12 +818,12 @@ object Form1: TForm1
         Colors.SelectionRectangleBorderColor = 15385233
         Colors.SelectionTextColor = clBlack
         Colors.TreeLineColor = 9471874
-        Colors.UnfocusedColor = 9695224
+        Colors.UnfocusedColor = 9687732
         Colors.UnfocusedSelectionColor = 15385233
         Colors.UnfocusedSelectionBorderColor = 15385233
-        Colors.HeaderColor = 9695224
+        Colors.HeaderColor = 9687732
         DefaultNodeHeight = 25
-        Header.AutoSizeIndex = 7
+        Header.AutoSizeIndex = 10
         Header.DefaultHeight = 25
         Header.Font.Charset = DEFAULT_CHARSET
         Header.Font.Color = clWindowText
@@ -829,6 +841,8 @@ object Form1: TForm1
         OnEditing = MainTreeEditing
         OnFocusChanged = OrdersTreeFocusChanged
         OnGetText = OrdersTreeGetText
+        ExplicitLeft = 153
+        ExplicitTop = 30
         Columns = <
           item
             Alignment = taCenter
@@ -865,7 +879,7 @@ object Form1: TForm1
             CaptionAlignment = taCenter
             Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coUseCaptionAlignment, coEditable]
             Position = 3
-            Width = 150
+            Width = 100
             Aggregate = False
             FilterMode = 0
             WideText = #1062#1077#1085#1072
@@ -875,7 +889,17 @@ object Form1: TForm1
             CaptionAlignment = taCenter
             Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coUseCaptionAlignment, coEditable]
             Position = 4
-            Width = 95
+            Width = 100
+            Aggregate = False
+            FilterMode = 0
+            WideText = #1062#1077#1085#1072' '#1074#1093#1086#1076
+          end
+          item
+            Alignment = taRightJustify
+            CaptionAlignment = taCenter
+            Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coUseCaptionAlignment, coEditable]
+            Position = 5
+            Width = 75
             Aggregate = False
             FilterMode = 0
             WideText = #1050#1086#1083'-'#1074#1086
@@ -884,7 +908,7 @@ object Form1: TForm1
             Alignment = taRightJustify
             CaptionAlignment = taCenter
             Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coUseCaptionAlignment, coEditable]
-            Position = 5
+            Position = 6
             Width = 100
             Aggregate = False
             FilterMode = 0
@@ -894,8 +918,28 @@ object Form1: TForm1
             Alignment = taRightJustify
             CaptionAlignment = taCenter
             Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coUseCaptionAlignment, coEditable]
-            Position = 6
-            Width = 250
+            Position = 7
+            Width = 100
+            Aggregate = False
+            FilterMode = 0
+            WideText = #1057#1091#1084#1084#1072' '#1074#1093#1086#1076
+          end
+          item
+            Alignment = taRightJustify
+            CaptionAlignment = taCenter
+            Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coUseCaptionAlignment, coEditable]
+            Position = 8
+            Width = 100
+            Aggregate = False
+            FilterMode = 0
+            WideText = #1052#1072#1088#1078#1072
+          end
+          item
+            Alignment = taRightJustify
+            CaptionAlignment = taCenter
+            Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coUseCaptionAlignment, coEditable]
+            Position = 9
+            Width = 200
             Aggregate = False
             FilterMode = 0
             WideText = #1050#1086#1085#1090#1088#1072#1082#1090
@@ -904,7 +948,7 @@ object Form1: TForm1
             Alignment = taRightJustify
             CaptionAlignment = taCenter
             Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coUseCaptionAlignment, coEditable]
-            Position = 7
+            Position = 10
             Width = 10
             Aggregate = False
             FilterMode = 0
@@ -970,9 +1014,9 @@ object Form1: TForm1
       '('
       'select'
       '    pid,'
-      '    cast([11] as int) [11],'
-      '    cast([12] as int) [12],'
-      '    cast([13] as money) [13]'
+      '    cast([11] as int) item_id,'
+      '    cast([12] as int) quantity,'
+      '    cast([13] as money) price'
       '  from'
       '    ('
       '    select o.pid, o.mid, o.val'
@@ -980,14 +1024,19 @@ object Form1: TForm1
       '    join orders o on ox.id = o.pid and o.mid>10'
       '    where ox.mid = 10 and ox.pid = %d'
       '    ) a'
-      '    pivot (max(val) for mid in ([11],[12],[13])) p'
+      '    pivot (max(val) for mid in ([11], [12], [13])) p'
       ')'
       'select'
       #9'r.*,'
-      #9'summ = [12]  * [13],'
-      #9'item = dbo.asstr([11], '#39'4803'#39', 0),'
-      #9'contract_id = dbo.asstr([11], '#39'4806'#39', 0),'
-      #9'contract_name = dbo.asstr([11], '#39'4806.4709'#39', 0),'
+      #9'price_in = cast(dbo.AsInt(item_id, '#39'4854'#39') * 0.01 as money),'
+      #9'summ = price * quantity,'
+      
+        #9'summ_in = cast(dbo.AsInt(item_id, '#39'4854'#39') * quantity * 0.01 as ' +
+        'money),'
+      #9'margin = dbo.AsStr(item_id, '#39'4860'#39', 0),'
+      #9'item_name = dbo.asStr(item_id, '#39'4803'#39', 0),'
+      #9'contract_id = dbo.asStr(item_id, '#39'4806'#39', 0),'
+      #9'contract_name = dbo.asStr(item_id, '#39'4806.4709'#39', 0),'
       #9'stock = '
       #9'('
       #9'select'
@@ -995,7 +1044,7 @@ object Form1: TForm1
       #9#9'from '
       #9#9'spr_data sd'
       #9#9'join spr_prop ost on sd.id=ost.linkid and ost.metaid=6809'
-      #9#9'where sd.metaid=6611 and pid=[11]'
+      #9#9'where sd.metaid=6611 and pid=item_id'
       #9')'
       'from r'
       'order by contract_name')
