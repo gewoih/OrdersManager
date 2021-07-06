@@ -80,10 +80,10 @@ object Form1: TForm1
       Colors.SelectionRectangleBorderColor = 15385233
       Colors.SelectionTextColor = clBlack
       Colors.TreeLineColor = 9471874
-      Colors.UnfocusedColor = 9687928
+      Colors.UnfocusedColor = 9693824
       Colors.UnfocusedSelectionColor = 15385233
       Colors.UnfocusedSelectionBorderColor = 15385233
-      Colors.HeaderColor = 9687928
+      Colors.HeaderColor = 9693824
       DefaultNodeHeight = 25
       Header.AutoSizeIndex = 9
       Header.DefaultHeight = 25
@@ -607,10 +607,10 @@ object Form1: TForm1
         Colors.SelectionRectangleBorderColor = 15385233
         Colors.SelectionTextColor = clBlack
         Colors.TreeLineColor = 9471874
-        Colors.UnfocusedColor = 9687732
+        Colors.UnfocusedColor = 9693628
         Colors.UnfocusedSelectionColor = 15385233
         Colors.UnfocusedSelectionBorderColor = 15385233
-        Colors.HeaderColor = 9687732
+        Colors.HeaderColor = 9693628
         DefaultNodeHeight = 25
         Header.AutoSizeIndex = 7
         Header.DefaultHeight = 25
@@ -818,10 +818,10 @@ object Form1: TForm1
         Colors.SelectionRectangleBorderColor = 15385233
         Colors.SelectionTextColor = clBlack
         Colors.TreeLineColor = 9471874
-        Colors.UnfocusedColor = 9687732
+        Colors.UnfocusedColor = 9693628
         Colors.UnfocusedSelectionColor = 15385233
         Colors.UnfocusedSelectionBorderColor = 15385233
-        Colors.HeaderColor = 9687732
+        Colors.HeaderColor = 9693628
         DefaultNodeHeight = 25
         Header.AutoSizeIndex = 10
         Header.DefaultHeight = 25
@@ -841,8 +841,6 @@ object Form1: TForm1
         OnEditing = MainTreeEditing
         OnFocusChanged = OrdersTreeFocusChanged
         OnGetText = OrdersTreeGetText
-        ExplicitLeft = 153
-        ExplicitTop = 30
         Columns = <
           item
             Alignment = taCenter
@@ -1056,7 +1054,6 @@ object Form1: TForm1
     BalloonFlags = bfInfo
     PopupMenu = TrayIconPopupmenu
     Visible = True
-    OnBalloonClick = TrayIcon1Click
     OnClick = TrayIcon1Click
     Left = 24
     Top = 552
@@ -1091,7 +1088,6 @@ object Form1: TForm1
     Top = 528
     object miOpenProgram: TMenuItem
       Caption = #1054#1090#1082#1088#1099#1090#1100
-      OnClick = TrayIcon1Click
     end
     object N4: TMenuItem
       Caption = '-'
